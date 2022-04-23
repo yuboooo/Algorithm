@@ -11,12 +11,9 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        step = [0] * (n+1)
-        if(n==1):
-            return 1
-        else:
-            step[1] = 1
-            step[2] = 2
-            for i in range(3,n+1):
-                step[i] = step[i-1] + step[i-2]
-        return step[n]
+        return helper(n)
+def helper(n,memo={}):
+    if (n<=1): return 1
+    if (n in memo): return memo[n]
+    memo[n] = helper(n-1,memo) + helper(n-2,memo)
+    return memo[n]
